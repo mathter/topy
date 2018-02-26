@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated topy -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="biz.ostw.topy.topy.presentation.TopyModelWizardID"
+            name="%_UI_TopyModelWizard_label"
+            class="biz.ostw.topy.topy.presentation.TopyModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TopyModelFile.gif">
+         <description>%_UI_TopyModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated topy -->
+      <editor
+            id="biz.ostw.topy.topy.presentation.TopyEditorID"
+            name="%_UI_TopyEditor_label"
+            icon="icons/full/obj16/TopyModelFile.gif"
+            extensions="topy"
+            class="biz.ostw.topy.topy.presentation.TopyEditor"
+            contributorClass="biz.ostw.topy.topy.presentation.TopyActionBarContributor">
+      </editor>
+   </extension>
+</plugin>
