@@ -1,31 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="library" version="12.0.0.2017041100">
-  <ownedViewpoints name="library (basic)" modelFileExtension="library">
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:tool="http://www.eclipse.org/sirius/diagram/description/tool/1.1.0" xmlns:tool_1="http://www.eclipse.org/sirius/description/tool/1.1.0" name="library" version="12.0.0.2017041100">
+  <ownedViewpoints name="library2 (basic)" modelFileExtension="library">
     <ownedRepresentations xsi:type="description_1:DiagramDescription" name="Library diagram" domainClass="Library">
       <defaultLayer name="Default">
-        <nodeMappings name="AuthorNode" domainClass="Author">
-          <style xsi:type="style:SquareDescription" labelPosition="node" resizeKind="NSEW">
+        <nodeMappings name="AuthorNode" labelDirectEdit="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='editAuthorNode']" domainClass="Author">
+          <style xsi:type="style:SquareDescription" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <labelFormat>bold</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='purple']"/>
           </style>
         </nodeMappings>
-        <nodeMappings name="BookNode" domainClass="Book">
-          <style xsi:type="style:EllipseNodeDescription" labelExpression="feature:title" labelPosition="node" resizeKind="NSEW">
+        <nodeMappings name="BookNode" labelDirectEdit="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='editTitle']" domainClass="Book">
+          <style xsi:type="style:EllipseNodeDescription" labelExpression="aql:self.title" resizeKind="NSEW">
             <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelFormat>bold</labelFormat>
             <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
           </style>
         </nodeMappings>
-        <edgeMappings sourceMapping="//@ownedViewpoints[name='library%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='BookNode']" targetMapping="//@ownedViewpoints[name='library%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='AuthorNode']">
+        <edgeMappings name="authorEdge" deletionDescription="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='deleteAuthorFromBook']" sourceMapping="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='BookNode']" targetMapping="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='AuthorNode']" targetFinderExpression="feature:authors" reconnections="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@toolSections.1/@ownedTools[name='reconnectAuthor']">
           <style sizeComputationExpression="2">
             <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
             <centerLabelStyleDescription>
+              <labelFormat>bold</labelFormat>
               <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
             </centerLabelStyleDescription>
           </style>
         </edgeMappings>
+        <toolSections name="CommonSection">
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createAuthorNode" label="Author" nodeMappings="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='AuthorNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Author" referenceName="authors"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:NodeCreationDescription" name="createBookNode" label="Book" nodeMappings="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@nodeMappings[name='BookNode']">
+            <variable name="container"/>
+            <viewVariable name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:container">
+                <subModelOperations xsi:type="tool_1:CreateInstance" typeName="Book" referenceName="books"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:EdgeCreationDescription" name="setAuthor" label="Link author" edgeMappings="//@ownedViewpoints[name='library2%20(basic)']/@ownedRepresentations[name='Library%20diagram']/@defaultLayer/@edgeMappings[name='authorEdge']">
+            <sourceVariable name="source"/>
+            <targetVariable name="target"/>
+            <sourceViewVariable name="sourceView"/>
+            <targetViewVariable name="targetView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:source">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="authors" valueExpression="var:target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+        </toolSections>
+        <toolSections name="SectionEdit">
+          <ownedTools xsi:type="tool:DirectEditLabel" name="editTitle">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="title" valueExpression="var:0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DirectEditLabel" name="editAuthorNode">
+            <mask mask="{0}"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:SetValue" featureName="name" valueExpression="var:0"/>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:DeleteElementDescription" name="deleteAuthorFromBook" forceRefresh="true">
+            <element name="element"/>
+            <elementView name="elementView"/>
+            <containerView name="containerView"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:Unset" featureName="authors" elementExpression="aql:elementView.targetNode.target"/>
+              </firstModelOperations>
+            </initialOperation>
+          </ownedTools>
+          <ownedTools xsi:type="tool:ReconnectEdgeDescription" name="reconnectAuthor">
+            <source name="source"/>
+            <target name="target"/>
+            <sourceView name="sourceView"/>
+            <targetView name="targetView"/>
+            <element name="element"/>
+            <initialOperation>
+              <firstModelOperations xsi:type="tool_1:ChangeContext" browseExpression="var:element">
+                <subModelOperations xsi:type="tool_1:SetValue" featureName="authors" valueExpression="aql:target"/>
+                <subModelOperations xsi:type="tool_1:Unset" featureName="authors" elementExpression="aql:source"/>
+              </firstModelOperations>
+            </initialOperation>
+            <edgeView name="edgeView"/>
+          </ownedTools>
+        </toolSections>
       </defaultLayer>
     </ownedRepresentations>
   </ownedViewpoints>
