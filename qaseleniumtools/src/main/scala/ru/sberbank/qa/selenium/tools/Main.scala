@@ -3,6 +3,7 @@ package ru.sberbank.qa.selenium.tools
 import java.util
 import java.util.List
 
+import org.apache.commons.io.FileUtils
 import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.firefox.FirefoxDriver
@@ -11,17 +12,28 @@ import org.openqa.selenium.support.events.EventFiringWebDriver
 
 
 object Main {
+
+  var webDriver: Option[EventFiringWebDriver] = Option(null)
+
   def main(args: Array[String]): Unit = {
-    System.setProperty("webdriver.gecko.driver", "./geckodriver")
-    val webDriver: EventFiringWebDriver = new EventFiringWebDriver(new FirefoxDriver())
+    val mainFrame: MainFrame = new MainFrame()
 
-    webDriver.get("http://lenta.ru")
-    webDriver.executeScript("document.onclick = function(e) { alert(e.target) }")
+    mainFrame.setVisible(true)
 
-//    val element: WebElement = webDriver.findElement(By.tagName("body")).asInstanceOf[WebElement]
-//
-//    val l: util.List[WebElement] = element.findElements(By.tagName("div"))
-//    println(l)
+
+    //    val file = FileUtils.toFile(Main.getClass.getResource("script.js"))
+    //    val script = FileUtils.readFileToString(file)
+    //
+    //    System.setProperty("webdriver.gecko.driver", "./geckodriver")
+    //    val webDriver: EventFiringWebDriver = new EventFiringWebDriver(new FirefoxDriver())
+    //
+    //    webDriver.get("http://sbt-okdbo-009.sigma.sbrf.ru:8292/ic/dcb-gucci/")
+    //    webDriver.executeScript(script)
+
+    //    val element: WebElement = webDriver.findElement(By.tagName("body")).asInstanceOf[WebElement]
+    //
+    //    val l: util.List[WebElement] = element.findElements(By.tagName("div"))
+    //    println(l)
 
     //    val html: WebElement = webDriver.executeScript("return document").asInstanceOf[WebElement]
     //
